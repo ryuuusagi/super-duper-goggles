@@ -45,9 +45,9 @@ def buscar_texto_pdf(pregunta, respuestas, secciones):
                 if i+1 not in resultados or round(score_respuesta / 100, 2) > resultados[i+1][1]:
                     resultados[i+1] = (cleaned_text[:150] + "...", round(score_respuesta / 100, 2))
 
-    # Convertir los resultados en un DataFrame ordenado por relevancia (limitado a 10 resultados)
+    # Convertir los resultados en un DataFrame ordenado por relevancia (limitado a 5 resultados)
     df_resultados = pd.DataFrame([(f"Artículo {art}", txt, rel) for art, (txt, rel) in resultados.items()],
                                   columns=["Artículo", "Texto", "Relevancia"]
-                                 ).sort_values(by="Relevancia", ascending=False).head(10)
+                                 ).sort_values(by="Relevancia", ascending=False).head(5)
 
     return df_resultados
